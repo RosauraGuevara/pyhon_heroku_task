@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'python_heroku_task.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': environ.get("Django_SECRET_KEY"),
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'python_heroku_task',
         'USER': environ.get("database_USER"),
         'PASSWORD': environ.get("database_PASSWORD"),
@@ -88,6 +88,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 
 # Password validation
