@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from os import environ
+from dotenv import load_dotenv
+load_dotenv()
 
 from pathlib import Path
 
@@ -20,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tlv)36c^h%me#0j)!67193036i0(q!%)rm_9k19_&32jf9!t3b'
+SECRET_KEY = environ.get("Django_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 
 # Application definition
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'python_heroku_task',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'python_heroku_task.wsgi.application'
+WSGI_APPLICATION = 'python_heroku_task.wsgi.app'
 
 
 # Database
@@ -76,10 +80,10 @@ WSGI_APPLICATION = 'python_heroku_task.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': environ.get("Django_SECRET_KEY"),
         'NAME': 'python_heroku_task',
-        'USER': 'sample_user',
-        'PASSWORD': 'password',
+        'USER': environ.get("database_USER"),
+        'PASSWORD': environ.get("database_PASSWORD"),
         'HOST': 'localhost',
         'PORT': '5432',
     }
